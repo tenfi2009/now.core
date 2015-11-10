@@ -1,0 +1,170 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.tenfi.now</groupId>
+  <artifactId>now.core</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>now.core Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+  	<spring.version>4.1.1.RELEASE</spring.version>
+  	<aspectj.version>1.7.3</aspectj.version>
+  	<java.version>1.7</java.version>
+  	<jetty.version>7.6.10.v20130312</jetty.version>
+  	<guava.version>18.0</guava.version>
+  	<commons-lang3.version>3.2.1</commons-lang3.version>
+  	<hibernate.version>4.3.7.Final</hibernate.version>
+  	<genericdao.version>1.2.0</genericdao.version>
+  	<tomcat-jdbc.version>7.0.56</tomcat-jdbc.version>
+  	<shiro.version>1.2.2</shiro.version>
+  	<jackson.version>2.2.1</jackson.version>
+  </properties>
+  <dependencies>
+  
+  	<!-- spring -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<version>${aspectj.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	
+	<!-- hibernate -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.googlecode.genericdao</groupId>
+		<artifactId>dao-hibernate</artifactId>
+		<version>${genericdao.version}</version> <!-- use current version -->
+		<scope>system</scope>
+		<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/dao-hibernate-1.2.0.jar</systemPath>
+	</dependency>
+	<dependency>
+		<groupId>com.googlecode.genericdao</groupId>
+		<artifactId>dao</artifactId>
+		<version>${genericdao.version}</version> use current version
+	</dependency>
+	
+	
+	<!-- connection pool -->
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-jdbc</artifactId>
+		<version>${tomcat-jdbc.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<!-- SECURITY begin -->
+	<dependency>
+		<groupId>org.apache.shiro</groupId>
+		<artifactId>shiro-spring</artifactId>
+		<version>${shiro.version}</version>
+	</dependency>
+	
+	<!-- JSON begin -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>com.fasterxml.jackson.core</groupId> -->
+<!-- 		<artifactId>jackson-databind</artifactId> -->
+<!-- 		<version>${jackson.version}</version> -->
+<!-- 	</dependency> -->
+	<dependency>
+		<groupId>com.fasterxml.jackson.module</groupId>
+		<artifactId>jackson-module-jaxb-annotations</artifactId>
+		<version>${jackson.version}</version>
+	</dependency>
+	<!-- JSON end -->
+	
+  	<!-- jetty -->
+	<dependency>
+		<groupId>org.eclipse.jetty.aggregate</groupId>
+		<artifactId>jetty-webapp</artifactId>
+		<version>${jetty.version}</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.jetty</groupId>
+		<artifactId>jetty-jsp</artifactId>
+		<version>${jetty.version}</version>
+		<scope>test</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+		<version>${commons-lang3.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+		<version>${guava.version}</version>
+	</dependency>
+  </dependencies>
+  <build>
+    <finalName>now.core</finalName>
+    
+    <plugins>
+    	<!-- compiler插件, 设定JDK版本 -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.1</version>
+			<configuration>
+				<source>${java.version}</source>
+				<target>${java.version}</target>
+				<showWarnings>true</showWarnings>
+			</configuration>
+		</plugin>
+		
+		<!-- jetty插件, 设定context path与spring profile -->
+		<plugin>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty-maven-plugin</artifactId>
+			<version>${jetty.version}</version>
+			<configuration>
+				<!-- jetty 默认使用的端口是 8080 -->
+				<httpConnector>
+			    	<port>8081</port>
+			    </httpConnector>
+				<!-- 自动热部署 默认值是 0。大于 0 的数值表示开启，0 表示关闭，单位为秒 -->
+<!-- 				<scanIntervalSeconds>2</scanIntervalSeconds> -->
+				<reload>manual</reload>
+				<systemProperties>
+					<systemProperty>
+						<name>spring.profiles.active</name>
+						<value>development</value>
+					</systemProperty>
+				</systemProperties>
+				<useTestClasspath>true</useTestClasspath>
+
+				<webAppConfig>
+					<contextPath>/${project.artifactId}</contextPath>
+				</webAppConfig>
+			</configuration>
+		</plugin>
+    </plugins>
+  </build>
+</project>
