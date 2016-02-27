@@ -6,16 +6,16 @@
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:task="http://www.springframework.org/schema/task"  
 	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-4.1.xsd
-		http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-4.1.xsd
-		http://www.springframework.org/schema/jdbc classpath:/org/springframework/jdbc/config/spring-jdbc-4.0.xsd
-		http://www.springframework.org/schema/jee classpath:/org/springframework/ejb/config/spring-jee-4.1.xsd
-		http://www.springframework.org/schema/aop classpath:/org/springframework/aop/config/spring-aop-4.1.xsd
-		http://www.springframework.org/schema/tx classpath:/org/springframework/transaction/config/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
 		http://www.springframework.org/schema/task
     	http://www.springframework.org/schema/task/spring-task-4.0.xsd
-		http://www.springframework.org/schema/data/jpa classpath:/org/springframework/data/jpa/repository/config/spring-jpa-1.3.xsd
-		http://www.springframework.org/schema/batch classpath:/org/springframework/batch/core/configuration/xml/spring-batch-3.0.xsd"
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd"
 	default-lazy-init="true">
 
 
@@ -47,10 +47,10 @@
 						
 						<!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
 						
-						<!-- 配置二级缓存  -->
-<!--         				<prop key="hibernate.cache.use_second_level_cache">true</prop> -->
-<!--         				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop> -->
-<!--         				<prop key="hibernate.cache.use_query_cache">true</prop> -->
+						<!-- 配置二级缓存  使用@Cacheable @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)在model类上-->
+        				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+        				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+        				<prop key="hibernate.cache.use_query_cache">true</prop>
 <!--         				<prop key="net.sf.ehcache.configurationResourceName">ehcache/ehcache.xml</prop> -->
 					</props>
 				</property>

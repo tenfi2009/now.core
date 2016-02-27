@@ -19,6 +19,8 @@
   	<tomcat-jdbc.version>7.0.56</tomcat-jdbc.version>
   	<shiro.version>1.2.2</shiro.version>
   	<jackson.version>2.2.1</jackson.version>
+  	<slf4j.version>1.7.7</slf4j.version>
+  	<logback.version>1.1.2</logback.version>
   </properties>
   <dependencies>
   
@@ -68,7 +70,51 @@
 		<artifactId>dao</artifactId>
 		<version>${genericdao.version}</version> use current version
 	</dependency>
+	<dependency>
+		<groupId>com.googlecode.genericdao</groupId>
+		<artifactId>search-hibernate</artifactId>
+		<version>${genericdao.version}</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/search-hibernate-1.2.0.jar</systemPath>
+	</dependency>
+	<!-- hibernate二级缓存使用ehcache -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-ehcache</artifactId>
+		<version>4.3.0.Final</version>
+	</dependency>
 	
+	<!-- LOGGING begin -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-classic</artifactId>
+		<version>${logback.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	
+	<!-- 代码直接调用log4j会被桥接到slf4j -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>log4j-over-slf4j</artifactId>
+		<version>${slf4j.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<!-- net.sf.log4jdbc.DriverSpy jdbc日志 -->
+	<dependency>
+		<groupId>com.googlecode.log4jdbc</groupId>
+		<artifactId>log4jdbc</artifactId>
+		<version>1.2</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/log4jdbc-1.2.jar</systemPath>
+	</dependency>
 	
 	<!-- connection pool -->
 	<dependency>
