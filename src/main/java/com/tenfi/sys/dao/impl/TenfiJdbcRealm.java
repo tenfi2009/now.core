@@ -47,7 +47,7 @@ public class TenfiJdbcRealm extends AuthorizingRealm{
 		if (StringUtils.isEmpty(account)) {
 			throw new AccountException("用户名不能为空！");
 		}
-		
+		// web.xml添加了openSessionInViewFilter并放在了最前面否则报Could not obtain transaction-synchronized Session for current thread错误
 		User user = userDao.findUserByAccount(account);
 		if(null == user){
 			throw new UnknownAccountException("用户名或密码不正确！请重新输入。");

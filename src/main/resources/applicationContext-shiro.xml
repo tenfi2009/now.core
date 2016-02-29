@@ -30,7 +30,7 @@
 	<bean id="shiroDbRealm" class="com.tenfi.sys.dao.impl.TenfiJdbcRealm" >
 		<!--  authenticationCachingEnabled默认为false,不开启缓存-->
 <!-- 		<property name="authenticationCachingEnabled" value="true"/> -->
-<!-- 		  <property name="credentialsMatcher" ref="passwordMatcher"></property>  -->
+		  <property name="credentialsMatcher" ref="passwordMatcher"></property> 
 	</bean>
 	<!-- Shiro's main business-tier object for web-enabled applications -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">

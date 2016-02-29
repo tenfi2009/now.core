@@ -102,10 +102,10 @@
 			<property name="password" value="${jdbc.password}" />
 		
 			<!-- Connection Pooling Info -->
-			<property name="maxActive" value="${jdbc.pool.maxActive}" />
-			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-			<property name="minIdle" value="0" />
-			<property name="defaultAutoCommit" value="false" />
+<!-- 			<property name="maxActive" value="${jdbc.pool.maxActive}" /> -->
+<!-- 			<property name="maxIdle" value="${jdbc.pool.maxIdle}" /> -->
+<!-- 			<property name="minIdle" value="0" /> -->
+<!-- 			<property name="defaultAutoCommit" value="false" /> -->
 		</bean>
 		<!-- 初始化数据表结构 与默认数据-->
 <!-- 		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL"> -->

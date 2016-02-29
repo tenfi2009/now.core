@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping
 	public String login() {
 		return "login/login";
 	}
