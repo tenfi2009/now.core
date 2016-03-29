@@ -5,7 +5,9 @@
  * <b>日期：</b>2013-6-25-下午10:35:14<br/>
  * <br/>
  */
-package com.tenfi.sys.model;
+package com.tenfi.core.util;
+
+import com.tenfi.sys.model.EnumType;
 
 /**
  * <b>类名称：</b>ResourceType<br/>

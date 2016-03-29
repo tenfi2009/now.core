@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/data/logs/now/core.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/data/logs/now/core.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<!-- project default level -->
+	<!-- TRACE < DEBUG < INFO < WARN < ERROR -->
+	<logger name="com.tenfi" level="INFO" />
+
+	<!--log4jdbc -->
+	<logger name="jdbc.sqltiming" level="INFO" />
+	<logger name="jdbc" level="WARN" />
+		
+	
+	<!-- hibernate -->
+	<logger name="org.hibernate" level="WARN"/>
+	<logger name="org.springframework" level="INFO"/>
+
+	<root level="WARN">
+		<appender-ref ref="console" />
+		<appender-ref ref="rollingFile" />
+	</root>
+</configuration>
