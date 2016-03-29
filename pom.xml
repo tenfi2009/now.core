@@ -17,6 +17,9 @@
   	<hibernate.version>4.3.7.Final</hibernate.version>
   	<genericdao.version>1.2.0</genericdao.version>
   	<tomcat-jdbc.version>7.0.56</tomcat-jdbc.version>
+  	<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+	<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+	<jdbc.driver.version>5.1.27</jdbc.driver.version>
   	<shiro.version>1.2.2</shiro.version>
   	<jackson.version>2.2.1</jackson.version>
   	<slf4j.version>1.7.7</slf4j.version>
@@ -100,12 +103,12 @@
 	
 	
 	<!-- 代码直接调用log4j会被桥接到slf4j -->
-	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>log4j-over-slf4j</artifactId>
-		<version>${slf4j.version}</version>
-		<scope>runtime</scope>
-	</dependency>
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.slf4j</groupId> -->
+<!-- 		<artifactId>log4j-over-slf4j</artifactId> -->
+<!-- 		<version>${slf4j.version}</version> -->
+<!-- 		<scope>runtime</scope> -->
+<!-- 	</dependency> -->
 	
 	<!-- net.sf.log4jdbc.DriverSpy jdbc日志 -->
 	<dependency>
@@ -121,6 +124,14 @@
 		<groupId>org.apache.tomcat</groupId>
 		<artifactId>tomcat-jdbc</artifactId>
 		<version>${tomcat-jdbc.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<!-- jdbc driver -->
+	<dependency>
+		<groupId>${jdbc.driver.groupId}</groupId>
+		<artifactId>${jdbc.driver.artifactId}</artifactId>
+		<version>${jdbc.driver.version}</version>
 		<scope>runtime</scope>
 	</dependency>
 	
@@ -143,6 +154,12 @@
 		<version>${jackson.version}</version>
 	</dependency>
 	<!-- JSON end -->
+	
+	<dependency>
+		<groupId>com.google.code.gson</groupId>
+		<artifactId>gson</artifactId>
+		<version>2.2.4</version>
+	</dependency>
 	
   	<!-- jetty -->
 	<dependency>

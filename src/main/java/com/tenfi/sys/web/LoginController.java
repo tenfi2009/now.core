@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {
+	
+	private Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
 	@RequestMapping
 	public String login() {
+		logger.info("------------logining");
 		return "login/login";
 	}
 
