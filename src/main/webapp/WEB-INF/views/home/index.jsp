@@ -3,16 +3,18 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-<!--   <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
   <link rel="stylesheet" href="${ctx}/static/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="${ctx}/static/bootstrap/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!--   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
+  <link rel="stylesheet" href="${ctx}/static/bootstrap/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="${ctx}/static/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -34,6 +36,12 @@
   <!-- user custom -->
   <link rel="stylesheet" href="${ctx}/static/zTree/css/zTreeStyle/zTreeStyle.css" />
   <link rel="stylesheet" href="${ctx}/static/jqGrid/css/ui.jqgrid.css" />
+  <link rel="stylesheet" href="${ctx}/static/jqGrid/css/jquery-ui.css" />
+  <!-- text fonts -->
+  <link rel="stylesheet" href="${ctx}/static/bootstrap/css/ace-fonts.css" />
+
+  <!-- ace styles -->
+  <link rel="stylesheet" href="${ctx}/static/bootstrap/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -331,17 +339,6 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" id="sys-nav-list">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
-          <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        </li>
         ${sysNavAccordion}
       </ul>
     </section>
@@ -618,6 +615,8 @@
 <script src="${ctx}/static/jqGrid/jquery.jqGrid.src.js"></script>
 <script src="${ctx}/static/jqGrid/i18n/grid.locale-cn.js"></script>
 <script src="${ctx}/static/jqGrid/jqGridExt.js"></script>
+<script src="${ctx}/static/jquery/jquery.form.js"></script>
+<script src="${ctx}/static/js/bootbox.js"></script>
 
 <script type="text/javascript">
 jQuery(function($) {
