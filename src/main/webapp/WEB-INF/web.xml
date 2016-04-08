@@ -24,6 +24,23 @@
     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   	</listener>
   	
+  	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+  	
 	<filter>
 		<filter-name>openSessionInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
@@ -64,5 +81,19 @@
 		<servlet-name>springServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<jsp-config>
+		<jsp-property-group>
+			<display-name>page config</display-name>
+			<url-pattern>/WEB-INF/views/*</url-pattern>
+			<el-ignored>false</el-ignored>
+			<page-encoding>utf-8</page-encoding>
+			<scripting-invalid>false</scripting-invalid>
+			<!--  
+			<include-prelude></include-prelude>
+			<include-coda></include-coda>
+			-->
+		</jsp-property-group>
+	</jsp-config>
 	
 </web-app>
