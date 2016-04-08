@@ -162,6 +162,7 @@
 			footerrow : false, // 分页上添加一行，用于显示统计信息
 
 			gridComplete : function() { // 当表格所有数据都加载完成，处理统计行数据
+				/**
 				var rowNum = $(this).jqGrid('getGridParam', 'records'); // 获取当前 jqGrid 的总记录数；
 				if (rowNum > 0) {
 					var options = {
@@ -175,8 +176,9 @@
 							});
 						}
 					};
-					// 		            $("#searchForm").ajaxSubmit(options);
+				$("#searchForm").ajaxSubmit(options);
 				}
+				**/
 			},
 			postData : {
 				"parentId" : function() {
@@ -239,11 +241,15 @@
 					delfunc : function(id) {
 						bootbox.confirm("您确认要删除该组织吗?", function(result) {
 							if (result) {
-								$.get("${ctx}/sys/org/remove/" + id, function(
-										data) {
+								$.get("${ctx}/sys/org/remove/" + id, function(data) {
 									if ("success" == data.status) {
-										$("#orgTable").jqGrid().trigger(
-												"reloadGrid");
+										var treeObj = $.fn.zTree.getZTreeObj("orgTree");
+										var nodes = treeObj.getSelectedNodes();
+										if (nodes.length > 0) {
+											treeObj.reAsyncChildNodes(nodes[0], "refresh");
+										} else {
+											treeObj.reAsyncChildNodes(null, "refresh");
+										}
 									} else if ("error" == data.status) {
 										bootbox.alert(data.msg);
 									}
@@ -282,8 +288,7 @@
 								$.get("${ctx}/sys/org/submit/" + selectedId,
 										function(data) {
 											if ("success" == data.status) {
-												$("#orgTable").jqGrid()
-														.trigger("reloadGrid");
+												$("#orgTable").jqGrid().trigger("reloadGrid");
 											} else if ("error" == data.status) {
 												bootbox.alert(data.msg);
 											}
@@ -323,7 +328,13 @@
 				success : function(data) {
 					if ("success" == data.status) {
 						$('#org_edit_dialog').modal("hide");
-						$("#orgTable").jqGrid().trigger("reloadGrid");
+						var treeObj = $.fn.zTree.getZTreeObj("orgTree");
+						var nodes = treeObj.getSelectedNodes();
+						if (nodes.length > 0) {
+							treeObj.reAsyncChildNodes(nodes[0], "refresh");
+						} else {
+							treeObj.reAsyncChildNodes(null, "refresh");
+						}
 					} else {
 						bootbox.alert(data.msg);
 					}

@@ -617,8 +617,37 @@
 <script src="${ctx}/static/jqGrid/jqGridExt.js"></script>
 <script src="${ctx}/static/jquery/jquery.form.js"></script>
 <script src="${ctx}/static/js/bootbox.js"></script>
+<script src="${ctx}/static/js/dropDownTree.js"></script>
 
 <script type="text/javascript">
+function resizeGrid(grid_render_id,func){
+	//resize to fit page size
+	  $(window).on('resize.jqGrid', function () {
+		  if(func) func();
+		  $(grid_render_id).jqGrid( 'setGridWidth', $(".page-content").width() );
+	  })
+	  //resize on sidebar collapse/expand
+	  var parent_column = $(grid_render_id).closest('[class*="col-"]');
+	  $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+		  if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+			  //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+			  setTimeout(function() {
+				  if(func) func();
+				  $(grid_render_id).jqGrid( 'setGridWidth', parent_column.width() );
+			  }, 0);
+		  }
+	  });
+	  /**
+	  $('.modal').off().on('show.bs.modal', function (e) {
+			$('.daterangepicker').hide();
+	  })
+	  $('.daterangepicker').hide();
+	  **/
+}
+
+
+
+
 jQuery(function($) {
 	$("a[target='center']","#sys-nav-list").off("click").on('click', function() {
 // 		$("#page-content-area").mask("正在加载...");
