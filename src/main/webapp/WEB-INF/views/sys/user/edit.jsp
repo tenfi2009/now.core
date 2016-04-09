@@ -32,7 +32,7 @@
 		<label class="col-md-2 control-label no-padding-right" for="orgFullName">所属于组织：</label>
 		<div class="col-md-10 input-group">
 			<input type="hidden" id="orgId" name="org.id" value="${user.org.id}">
-			<input class="form-control input-large" type="text" id="orgFullName" name="org.fullName"  value="${user.org.fullName}"  required />
+			<input class="form-control input-large" type="text" id="orgFullName" readonly="true" name="org.fullName"  value="${user.org.fullName}"  required />
 			<span id="orgFullName_addon" class="input-group-addon"><i class="icon-search"></i></span>
 		</div>
 	</div>
@@ -67,40 +67,7 @@
 			 orgTree.show();
 		 });
 		
-		$("#addNew_form").validate({
-			errorElement: 'div',
-			errorClass: 'help-block',
-			focusInvalid: false,
-			invalidHandler: function (event, validator) { //display error alert on form submit   
-				$('.alert-danger', $('.login-form')).show();
-			},
-	
-			highlight: function (e) {
-				$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-			},
-	
-			success: function (e) {
-				$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
-				$(e).remove();
-			},
-	
-			errorPlacement: function (error, element) {
-				if(element.is(':checkbox') || element.is(':radio')) {
-					var controls = element.closest('div[class*="col-"]');
-					if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-					else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-				}
-				else if(element.is('.select2')) {
-					error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-				}
-				else if(element.is('.chosen-select')) {
-					error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-				}
-				else error.insertAfter(element.parent());
-			},
-	
-			submitHandler: function (form) {
-			}
-		});
+		validate("#edit_form");
+		
 	});
 </script>

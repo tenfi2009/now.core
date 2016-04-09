@@ -623,68 +623,42 @@
 <script src="${ctx}/static/jquery/validate/messages_bs_zh.js"></script>
 
 <script type="text/javascript">
-function resizeGrid(grid_render_id,func){
-	//resize to fit page size
-	  $(window).on('resize.jqGrid', function () {
-		  if(func) func();
-		  $(grid_render_id).jqGrid( 'setGridWidth', $(".page-content").width() );
-	  })
-	  //resize on sidebar collapse/expand
-	  var parent_column = $(grid_render_id).closest('[class*="col-"]');
-	  $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
-		  if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
-			  //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
-			  setTimeout(function() {
-				  if(func) func();
-				  $(grid_render_id).jqGrid( 'setGridWidth', parent_column.width() );
-			  }, 0);
-		  }
-	  });
-	  /**
-	  $('.modal').off().on('show.bs.modal', function (e) {
-			$('.daterangepicker').hide();
-	  })
-	  $('.daterangepicker').hide();
-	  **/
-}
-
-
-
-
-jQuery(function($) {
-	$("a[target='center']","#sys-nav-list").off("click").on('click', function() {
-// 		$("#page-content-area").mask("正在加载...");
-		//样式设置
-// 		if (!$(this).parent().hasClass("active")) {
-// 			$(".active","#sys-nav-list").removeClass("active");
-// 			$(this).parent().addClass("active");
-// 		}
-		
-// 		var parentTitle = null;
-// 		if($(this).parent().parent().hasClass("submenu")){
-// 			$(this).parent().parent().parent().addClass("active");
-// 			parentTitle = $(":first>span",$(this).parent().parent().parent()).html();
-// 		}
-		
-// 		//设置导航栏
-// 		var htmlPath = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li><li class="active">'+ $(this).text() +'</li>';
-// 		if(parentTitle){
-// 			htmlPath = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li><li><a href="#">'+ parentTitle +'</a></li><li class="active">'+ $(this).text() +'</li>';
-// 		}
-		
-// 		$("ul > li","#breadcrumbs").remove();
-// 		$("#sys-nav-path").append(htmlPath);
-		
-		$("#page-content-area").load("${ctx}" + $(this).attr('href')+"?_="+Math.random(),function(response, status, xhr){
-// 			$("#page-content-area").unmask();
-			if("error" == status){
-				bootbox.alert("系统错误！请联系管理员处理。");
-			}
+	<%@ include file="index.js" %>
+	
+	jQuery(function($) {
+		$("a[target='center']","#sys-nav-list").off("click").on('click', function() {
+	// 		$("#page-content-area").mask("正在加载...");
+			//样式设置
+	// 		if (!$(this).parent().hasClass("active")) {
+	// 			$(".active","#sys-nav-list").removeClass("active");
+	// 			$(this).parent().addClass("active");
+	// 		}
+			
+	// 		var parentTitle = null;
+	// 		if($(this).parent().parent().hasClass("submenu")){
+	// 			$(this).parent().parent().parent().addClass("active");
+	// 			parentTitle = $(":first>span",$(this).parent().parent().parent()).html();
+	// 		}
+			
+	// 		//设置导航栏
+	// 		var htmlPath = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li><li class="active">'+ $(this).text() +'</li>';
+	// 		if(parentTitle){
+	// 			htmlPath = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li><li><a href="#">'+ parentTitle +'</a></li><li class="active">'+ $(this).text() +'</li>';
+	// 		}
+			
+	// 		$("ul > li","#breadcrumbs").remove();
+	// 		$("#sys-nav-path").append(htmlPath);
+			
+			$("#page-content-area").load("${ctx}" + $(this).attr('href')+"?_="+Math.random(),function(response, status, xhr){
+	// 			$("#page-content-area").unmask();
+				if("error" == status){
+					bootbox.alert("系统错误！请联系管理员处理。");
+				}
+			});
+			
+			return false;
 		});
-		
-		return false;
-	});
-})
+	})
 </script>
 </body>
 </html>
