@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="${ctx}/static/zTree/css/zTreeStyle/zTreeStyle.css" />
   <link rel="stylesheet" href="${ctx}/static/jqGrid/css/ui.jqgrid.css" />
   <link rel="stylesheet" href="${ctx}/static/jqGrid/css/jquery-ui.css" />
+  <link rel="stylesheet" href="${ctx}/static/jquery/validate/css/validate.css" />
   <!-- text fonts -->
   <link rel="stylesheet" href="${ctx}/static/bootstrap/css/ace-fonts.css" />
 
@@ -618,6 +619,8 @@
 <script src="${ctx}/static/jquery/jquery.form.js"></script>
 <script src="${ctx}/static/js/bootbox.js"></script>
 <script src="${ctx}/static/js/dropDownTree.js"></script>
+<script src="${ctx}/static/jquery/validate/jquery.validate.js"></script>
+<script src="${ctx}/static/jquery/validate/messages_bs_zh.js"></script>
 
 <script type="text/javascript">
 function resizeGrid(grid_render_id,func){
