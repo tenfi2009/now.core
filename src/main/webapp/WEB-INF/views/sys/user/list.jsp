@@ -18,7 +18,7 @@
 						<input type="text" name="name"/>&nbsp;&nbsp;
 						<label>所属组织：</label>
 						<input type="hidden" id ="queryOrgId" name="org.id"/>
-						<input type="text" id ="queryorgFullName" name="org.fullName"/>&nbsp;&nbsp;
+						<input type="text" id ="queryorgFullName" name="org.fullName" readonly="readonly"/>&nbsp;&nbsp;
 						<label>启用/禁用：</label>
 						<select name="isEnable">
 							<option value="">--全部--</option>

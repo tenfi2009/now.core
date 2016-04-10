@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<div class="row page-content">
-	<div class="col-xs-12">
-		<table id="resTable"></table>
-		<div id="resTablepager"></div>
+<div class="page-content">
+	<div class="row ">
+		<div class="col-xs-12 ">
+			<table id="resTable"></table>
+			<div id="resTablepager"></div>
+		</div>
 	</div>
-	<!-- /.col -->
 </div>
 <!-- /.row -->
 <!-- 新增资源 -->

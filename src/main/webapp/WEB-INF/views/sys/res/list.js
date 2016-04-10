@@ -21,7 +21,7 @@ $(function() {
 				colModel : [ {name : 'id',index : 'id',hidden : true},
 				             {name : 'name',index : 'name',width : 120},
 				             {name : 'type',index : 'type',width : 60},
-				             {name : 'uri',index : 'uri',width : 180},
+				             {name : 'uri',index : 'uri',width : 120},
 				             {name : 'permission',index : 'permission',width : 120},
 				             {name : 'isSuper',index : 'isSuper',width : 60},
 				             {name : 'status',index : 'status',width : 40},
@@ -103,19 +103,6 @@ $(function() {
 			},
 			{}, // delete instead that del:false we need this
 			{ // search options
-				caption : "高级查询",
-				recreateForm : true,
-				afterShowSearch : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-title')
-							.wrap('<div class="widget-header" />')
-					$.jqGridExt.setStyleSearchForm(form);
-				},
-				afterRedraw : function() {
-					$.jqGridExt.setStyleSearchFilters($(this));
-				},
-				showQuery : false,
-				multipleSearch : true
 			},
 			{}/* view parameters*/
 			
@@ -199,10 +186,6 @@ $(function() {
 		});
 	}
 	
-function resetPw(id) {
-		
-}
-
 function submit(id) {
 	var selectedId = jQuery(grid_render_id).jqGrid('getGridParam','selrow');
 	if(null == selectedId || "" == selectedId){
