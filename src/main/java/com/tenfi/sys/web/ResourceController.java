@@ -6,8 +6,6 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.googlecode.genericdao.search.Sort;
 import com.tenfi.core.model.Page;
-import com.tenfi.core.util.ResourceTypeEditor;
 import com.tenfi.core.util.TreeUtils;
 import com.tenfi.core.web.AjaxResult;
 import com.tenfi.core.web.BaseController;
 import com.tenfi.sys.model.Resource;
-import com.tenfi.sys.model.ResourceType;
 import com.tenfi.sys.service.ResourceService;
 
 @Controller
@@ -32,12 +28,6 @@ public class ResourceController extends BaseController{
 	@Autowired
 	private ResourceService service;
 	
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		super.initBinder(binder);
-		binder.registerCustomEditor(ResourceType.class, new ResourceTypeEditor());
-	}
-
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String list() {
 		return "sys/res/list";
@@ -90,7 +80,7 @@ public class ResourceController extends BaseController{
 		return res;
 	}
 	
-	@RequestMapping(value="/save", method = RequestMethod.POST)
+	@RequestMapping(value="/save", method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public AjaxResult save(@ModelAttribute("res")Resource res) {
 		AjaxResult rs = new AjaxResult();

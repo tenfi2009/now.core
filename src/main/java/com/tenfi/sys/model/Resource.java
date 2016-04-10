@@ -56,7 +56,7 @@ public class Resource extends TreeVO<String> implements Serializable{
 	
 	/** 资源类型 */
 	@JsonSerialize(using = EnumTypeSerialize.class)
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.ORDINAL)// EnumType.ORDINA:采用枚举类型的序号值与数据库进行交互,value=EnumType.STRING:采用枚举类型与数据库进行交互
 	ResourceType type;
 
 	/** 资源图标 */

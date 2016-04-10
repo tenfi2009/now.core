@@ -16,19 +16,19 @@
 		<label class="col-sm-3 control-label no-padding-right"><span style="color: red">*</span>资源类型：</label>
 		<div class="radio col-sm-2">
 			<label>
-				<input name="type" value="0" type="radio" <c:if test="${res.type.value == 0}">checked</c:if> required class="ace" />
+				<input name="type" value="GROUP" type="radio" <c:if test="${res.type.value == 0}">checked</c:if> required class="ace" />
 				<span class="lbl">资源组</span>
 			</label>
 		</div>
 		<div class="radio col-sm-2">
 			<label>
-				<input name="type" value="1" type="radio" <c:if test="${res.type.value == 1}">checked</c:if> class="ace" />
+				<input name="type" value="MENU" type="radio" <c:if test="${res.type.value == 1}">checked</c:if> class="ace" />
 				<span class="lbl">菜单</span>
 			</label>
 		</div>
 		<div class="radio col-sm-2">
 			<label>
-				<input name="type" value="2" type="radio" <c:if test="${res.type.value == 2}">checked</c:if> class="ace" />
+				<input name="type" value="FUNCTION" type="radio" <c:if test="${res.type.value == 2}">checked</c:if> class="ace" />
 				<span class="lbl">功能</span>
 			</label>
 		</div>

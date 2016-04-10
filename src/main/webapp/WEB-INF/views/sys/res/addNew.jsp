@@ -14,19 +14,19 @@
 		<label class="col-sm-3 control-label no-padding-right"><span style="color: red">*</span>资源类型：</label>
 		<div class="radio col-sm-2">
 			<label>
-				<input name="type" value="0" type="radio" required class="ace" />
+				<input name="type" value="GROUP" type="radio" required class="ace" />
 				<span class="lbl">资源组</span>
 			</label>
 		</div>
 		<div class="radio col-sm-2">
 			<label>
-				<input name="type" value="1" type="radio" class="ace" />
+				<input name="type" value="MENU" type="radio" class="ace" />
 				<span class="lbl">菜单</span>
 			</label>
 		</div>
 		<div class="radio col-sm-2">
 			<label>
-				<input name="type" value="2" type="radio" class="ace" />
+				<input name="type" value="FUNCTION" type="radio" class="ace" />
 				<span class="lbl">功能</span>
 			</label>
 		</div>
@@ -81,40 +81,6 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("#addNew_form").validate({
-			errorElement: 'div',
-			errorClass: 'help-block',
-			focusInvalid: false,
-			invalidHandler: function (event, validator) { //display error alert on form submit   
-				$('.alert-danger', $('.login-form')).show();
-			},
-	
-			highlight: function (e) {
-				$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-			},
-	
-			success: function (e) {
-				$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
-				$(e).remove();
-			},
-	
-			errorPlacement: function (error, element) {
-				if(element.is(':checkbox') || element.is(':radio')) {
-					var controls = element.closest('div[class*="col-"]');
-					if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-					else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-				}
-				else if(element.is('.select2')) {
-					error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-				}
-				else if(element.is('.chosen-select')) {
-					error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-				}
-				else error.insertAfter(element.parent());
-			},
-	
-			submitHandler: function (form) {
-			}
-		});
+		validate("#addNew_form");
 	});
 </script>
