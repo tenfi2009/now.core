@@ -10,8 +10,8 @@ import javax.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.tenfi.sys.model.EnumTypeSerialize;
-import com.tenfi.sys.model.Status;
+import com.tenfi.enums.EnumTypeSerialize;
+import com.tenfi.enums.Status;
 
 /**
  * 
@@ -51,7 +51,7 @@ public abstract class VO<ID extends Serializable> extends Entity<ID>{
 	/**
 	 * 状态
 	 * 
-	 * @see org.matrix.core.common.enums.Status
+	 * @see com.tenfi.enums.matrix.core.common.enums.Status
 	 */
 	@JsonSerialize(using = EnumTypeSerialize.class)// 页面展示时显示枚举的displayName
 	@Enumerated(EnumType.ORDINAL)// 存入数据库时,存的是枚举的序号从0开始

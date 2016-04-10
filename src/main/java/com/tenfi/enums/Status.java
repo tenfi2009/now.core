@@ -1,4 +1,6 @@
-package com.tenfi.sys.model;
+package com.tenfi.enums;
+
+
 
 /**
  * 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.tenfi.core.model.VO;
-import com.tenfi.sys.model.Status;
+import com.tenfi.enums.Status;
 
 public interface VOService<T extends VO, ID extends Serializable> extends BaseService<T, ID> {
 	

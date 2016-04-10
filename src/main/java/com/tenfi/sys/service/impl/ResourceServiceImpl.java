@@ -18,10 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.googlecode.genericdao.search.Search;
 import com.tenfi.core.service.impl.TreeServiceImpl;
+import com.tenfi.enums.Status;
 import com.tenfi.sys.common.SysConstants;
 import com.tenfi.sys.dao.ResourceDao;
 import com.tenfi.sys.model.Resource;
-import com.tenfi.sys.model.Status;
 import com.tenfi.sys.model.User;
 import com.tenfi.sys.service.ResourceService;
 import com.tenfi.sys.service.UserService;
@@ -47,11 +47,6 @@ public class ResourceServiceImpl extends TreeServiceImpl<Resource, String> imple
 	@Override
 	public ResourceDao getDao() {
 		return dao;
-	}
-
-	protected void setDefaultValue(Resource res) {
-		super.setDefaultValue(res);
-		res.setStatus(Status.VALID);
 	}
 
 	/**

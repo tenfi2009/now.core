@@ -27,6 +27,8 @@ import org.hibernate.annotations.NotFoundAction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.tenfi.core.model.TreeVO;
+import com.tenfi.enums.EnumTypeSerialize;
+import com.tenfi.enums.ResourceType;
 
 /**
  * <b>类名称：</b>Resource<br/>

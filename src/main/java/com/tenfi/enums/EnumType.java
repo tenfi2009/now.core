@@ -1,4 +1,4 @@
-package com.tenfi.sys.model;
+package com.tenfi.enums;
 
 /**
  * 枚举类型的定义

@@ -11,7 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import com.googlecode.genericdao.search.Search;
 import com.tenfi.core.model.VO;
 import com.tenfi.core.service.VOService;
-import com.tenfi.sys.model.Status;
+import com.tenfi.enums.Status;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public abstract class VOServiceImpl <T extends VO, ID extends Serializable> extends  BaseServiceImpl<T, ID> implements VOService<T,ID>{
 	@Override
