@@ -12,7 +12,7 @@ $(function() {
 				datatype : "json",
 				colNames : [ 'ID', '用户编码', '用户账号', '用户名称', '启用', '所属组织','创建时间', '创建人', '状态','操作'],
 				colModel : [ {name : 'id',index : 'id',hidden : true},
-				             {name : 'code',index : 'code',width : 120},
+				             {name : 'code',index : 'code',width : 60},
 				             {name : 'account',index : 'account',width : 80},
 				             {name : 'name',index : 'name',width : 80},
 				             {name : 'isEnable',index : 'isEnable',width : 60},

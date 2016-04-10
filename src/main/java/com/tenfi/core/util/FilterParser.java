@@ -208,7 +208,7 @@ public class FilterParser implements Serializable {
 			}
 		}else if("dec".equals(filterItem.get(OP_PROPERTY_TYPE))){
 			return new BigDecimal((String)filterItem.get(OP_VALUE));
-		}else if(filterItem.get(OP_PROPERTY_TYPE).toString().startsWith("com.matrix.")){
+		}else if(filterItem.get(OP_PROPERTY_TYPE).toString().startsWith("com.tenfi.")){
 			Class clazz = Class.forName(filterItem.get(OP_PROPERTY_TYPE).toString());
 			if(clazz.isEnum()){
 				Object enums = MethodUtils.invokeStaticMethod(clazz, "values", null);

@@ -12,7 +12,7 @@ $(function() {
 				datatype : "json",
 				colNames : [ 'ID', '角色编码', '角色名称', '创建时间', '创建人', '状态', '更新时间','操作'],
 				colModel : [ {name : 'id',index : 'id',hidden : true},
-				             {name : 'code',index : 'code',width : 120},
+				             {name : 'code',index : 'code',width : 60},
 				             {name : 'name',index : 'name',width : 80},
 				             {name : 'createTime',index : 'createTime',width : 120},
 				             {name : 'creator',index : 'creator',width : 60},
@@ -86,19 +86,6 @@ $(function() {
 			},
 			{}, // delete instead that del:false we need this
 			{ // search options
-				caption : "高级查询",
-				recreateForm : true,
-				afterShowSearch : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-title')
-							.wrap('<div class="widget-header" />')
-					$.jqGridExt.setStyleSearchForm(form);
-				},
-				afterRedraw : function() {
-					$.jqGridExt.setStyleSearchFilters($(this));
-				},
-				showQuery : false,
-				multipleSearch : true
 			},
 			{}/* view parameters*/
 			
@@ -111,7 +98,6 @@ $(function() {
 		});
 
 	
-	//var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 	$("#add_dialog_save").on('click', function() {
 		if(!$("#addNew_form").valid()){
 			return
@@ -146,10 +132,6 @@ $(function() {
 		});
 	});
 })
-
-function assignResource(roleId) {
-	
-}
 
 function addNew() {
 	$("#add_dialog_content").load('sys/role/addNew');
@@ -215,7 +197,7 @@ function getQueryFilter() {
 		}else if(e.name == 'name'){
 			rules += '{"t":"s","f":"name","op":"like","v":"'+e.value+'"},';
 		}else if(e.name == 'status'){
-			rules += '{"t":"com.matrix.core.common.enums.Status","f":"status","op":"eq","v":"'+e.value+'"},';
+			rules += '{"t":"com.tenfi.enums.Status","f":"status","op":"eq","v":"'+e.value+'"},';
 		}
     } 
     if(0 == rules.length){
