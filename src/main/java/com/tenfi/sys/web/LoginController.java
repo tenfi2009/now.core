@@ -31,15 +31,18 @@ public class LoginController {
 		return "login/login";
 	}
 
-//	@RequestMapping(method = RequestMethod.POST)
-//	public String fail(HttpServletRequest request,@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) {
-//		//是否已经登录系统
-//		Subject currentUser = SecurityUtils.getSubject();  
-//        if (currentUser.isAuthenticated()) {
-//        	return  "redirect:/";
-//        }
-//		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
-//		
-//		return "login/login";
-//	}
+	@RequestMapping(method = RequestMethod.POST)
+	public String fail(HttpServletRequest request,@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) {
+		//是否已经登录系统
+		Subject currentUser = SecurityUtils.getSubject();
+		
+        if (currentUser.isAuthenticated() && currentUser.getPrincipal().equals(userName)) {
+        	return  "redirect:/";
+        } else if (currentUser.isAuthenticated()) {
+        	currentUser.logout();
+        }
+		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
+		
+		return "login/login";
+	}
 }

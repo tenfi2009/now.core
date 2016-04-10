@@ -102,11 +102,6 @@ public class UserController extends BaseController{
 		page = service.findPage(page, queryParams, groupId, isSub);
 		return page;
 	}
-	@RequestMapping(value="/addNew", method = RequestMethod.GET)
-	public @ModelAttribute("user") User addNew(String parentId) {
-		User user = new User();
-		return user;
-	}
 	
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public String edit(String id) {

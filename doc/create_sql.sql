@@ -115,3 +115,32 @@ CREATE TABLE t_sys_user_role(
    role_id  VARCHAR(36) COMMENT '角色ID',
    user_id  VARCHAR(36) COMMENT '用户ID'
 )ENGINE=InnoDB;
+
+/********************************系统管理模块 结束**************************************************/
+
+/********************************基础数据 开始**************************************************/
+-- ================================================================================================--
+-- author	
+-- create time	
+-- description	数据字典(t_bd_dict)
+-- ================================================================================================--
+create table t_bd_dict
+(
+   id                   integer not null  PRIMARY KEY auto_increment COMMENT 'ID',
+   parent_id            integer COMMENT '上级字典',
+   code                 varchar(32) COMMENT '编码',
+   name                 varchar(32) COMMENT '名称',
+   full_name            varchar(254) COMMENT '全称',
+   sort_no              int COMMENT '排序号',
+   description          varchar(254) COMMENT '描述',
+   status               int COMMENT '状态',
+   create_time          DATETIME COMMENT '创建时间',
+   creator              varchar(32) COMMENT '创建者',
+   update_time          DATETIME COMMENT '最后更新时间',
+   update_user          varchar(32) COMMENT '最后更新人员',
+   level_code           varchar(254) COMMENT '树的层级编码',
+   degree               int COMMENT '树的度',
+   is_leaf              boolean COMMENT '是否叶子节点'
+)ENGINE=InnoDB;
+
+/********************************基础数据 结束**************************************************/
