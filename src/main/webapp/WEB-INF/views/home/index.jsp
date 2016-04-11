@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="${ctx}/static/jqGrid/css/ui.jqgrid.css" />
   <link rel="stylesheet" href="${ctx}/static/jqGrid/css/jquery-ui.css" />
   <link rel="stylesheet" href="${ctx}/static/jquery/validate/css/validate.css" />
+  <link rel="stylesheet" href="${ctx}/static/jquery/css/jquery.loadmask.css" />
   <!-- text fonts -->
   <link rel="stylesheet" href="${ctx}/static/bootstrap/css/ace-fonts.css" />
 
@@ -351,13 +352,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+	      <ul id="sys-nav-path" class="breadcrumb">
+	        <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li>
+	      </ul>
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -621,36 +619,37 @@
 <script src="${ctx}/static/js/dropDownTree.js"></script>
 <script src="${ctx}/static/jquery/validate/jquery.validate.js"></script>
 <script src="${ctx}/static/jquery/validate/messages_bs_zh.js"></script>
+<script src="${ctx}/static/jquery/jquery.loadmask.js"></script>
 
 <script type="text/javascript">
 	<%@ include file="index.js" %>
 	
 	jQuery(function($) {
 		$("a[target='center']","#sys-nav-list").off("click").on('click', function() {
-	// 		$("#page-content-area").mask("正在加载...");
+			$("#page-content-area").mask("正在加载...");
 			//样式设置
-	// 		if (!$(this).parent().hasClass("active")) {
-	// 			$(".active","#sys-nav-list").removeClass("active");
-	// 			$(this).parent().addClass("active");
-	// 		}
+			if (!$(this).parent().hasClass("active")) {
+				$(".active","#sys-nav-list").removeClass("active");
+				$(this).parent().addClass("active");
+			}
 			
-	// 		var parentTitle = null;
-	// 		if($(this).parent().parent().hasClass("submenu")){
-	// 			$(this).parent().parent().parent().addClass("active");
-	// 			parentTitle = $(":first>span",$(this).parent().parent().parent()).html();
-	// 		}
+			var parentTitle = null;
+			if($(this).parent().parent().hasClass("treeview-menu")){
+				$(this).parent().parent().parent().addClass("active");
+				parentTitle = $(":first>span",$(this).parent().parent().parent()).html();
+			}
 			
-	// 		//设置导航栏
-	// 		var htmlPath = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li><li class="active">'+ $(this).text() +'</li>';
-	// 		if(parentTitle){
-	// 			htmlPath = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li><li><a href="#">'+ parentTitle +'</a></li><li class="active">'+ $(this).text() +'</li>';
-	// 		}
+			//设置导航栏
+			var htmlPath = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li><li class="active">'+ $(this).text() +'</li>';
+			if(parentTitle){
+				htmlPath = '<li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li><li><a href="#">'+ parentTitle +'</a></li><li class="active">'+ $(this).text() +'</li>';
+			}
 			
-	// 		$("ul > li","#breadcrumbs").remove();
-	// 		$("#sys-nav-path").append(htmlPath);
+			$("ul > li",".content-header").remove();
+			$("#sys-nav-path").append(htmlPath);
 			
 			$("#page-content-area").load("${ctx}" + $(this).attr('href')+"?_="+Math.random(),function(response, status, xhr){
-	// 			$("#page-content-area").unmask();
+				$("#page-content-area").unmask();
 				if("error" == status){
 					bootbox.alert("系统错误！请联系管理员处理。");
 				}
