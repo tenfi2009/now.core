@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.googlecode.genericdao.search.Search;
 import com.tenfi.core.service.impl.TreeServiceImpl;
-import com.tenfi.enums.Status;
 import com.tenfi.sys.common.SysConstants;
 import com.tenfi.sys.dao.ResourceDao;
 import com.tenfi.sys.model.Resource;
@@ -94,26 +93,7 @@ public class ResourceServiceImpl extends TreeServiceImpl<Resource, String> imple
 				}
 
 				// 是否有下级节点
-				boolean hasChildren = false;
-				for (int k = 0; k < size; k++) {
-					res = resList.get(k);
-					if (null != res.getParent() && res.getParent().getId().equals(group.getId())) {
-						hasChildren = true;
-						break;
-					}
-				}
-//				 <ul class="sidebar-menu">
-//			        <li class="active treeview">
-//			          <a href="#">
-//			            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
-//			          </a>
-//			          <ul class="treeview-menu">
-//			            <li class="active"><a href="${ctx}/static/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-//			            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-//			          </ul>
-//			        </li>
-//			        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-//			      </ul>
+				boolean hasChildren = true;
 				
 				if (hasChildren) {
 					accordion.append("<li class=\"treeview\">");
