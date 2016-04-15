@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +44,7 @@ public class CaseController extends BaseController {
 		page.getSorts().add(new Sort("createTime",false));
 		
 		
-		Map queryParams = new HashMap();
+		Map<String, String> queryParams = new HashMap<String, String>();
 		
 		page = service.findPage(page, queryParams);
 		return page;
@@ -55,7 +56,9 @@ public class CaseController extends BaseController {
 	}
 	
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
-	public String edit(String id) {
+	public String edit(ModelMap map, Long id) {
+		Case case1 = service.get(id);
+		map.put("case", case1);
 		return "now/case/edit";
 	}
 	

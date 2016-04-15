@@ -1,5 +1,6 @@
 package com.tenfi.now.web;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class DrugController extends BaseController{
 //		page.getSorts().add(new Sort("createTime",false));
 		
 		
-		Map queryParams = new HashMap();
+		Map<String, String> queryParams = new HashMap<String, String>();
 		
 		String rules = "[{\"t\":\"l\",\"f\":\"parent.id\",\"op\":\"eq\",\"v\":\""+parentId+"\"}]";
 		String filters = "{\"groupOp\":\"AND\",\"rules\":"+rules+"}";
@@ -60,15 +61,16 @@ public class DrugController extends BaseController{
 			drug.setParent(case1);
 			if (0 == drug.getId().intValue()) {
 				drug.setCreator(getCurrentUser().getName());
-//				drug.setCreateTime(new Date());
+				drug.setCreateTime(new Date());
 			} else {
 				drug.setUpdateUser(getCurrentUser().getName());
-//				drug.setUpdateTime(new Date());
+				drug.setUpdateTime(new Date());
 			}
 			service.save(drug);	
 		}else if(oper.equals("del")){
 			return rs;
 		}
+		rs.setStatus(AjaxResult.STATUS_SUCCESS);
 		return rs;
 	}
 	

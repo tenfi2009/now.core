@@ -45,7 +45,9 @@ $(function() {
 				colNames : [ 'ID','姓名','性别','年龄','手机号','操作'],
 				colModel : [ {name : 'id',index : 'id',width : 20, hidden : true},
 				             {name : 'name',index : 'name',align:"center",width : 30},
-				             {name : 'sex',index : 'sex',align:"center",width : 20},
+				             {name : 'sex',index : 'sex',align:"center",width : 20,formatter: function (cellvalue, options, rowObject) {
+				            	 return $.dict.getNameByCode('sex', cellvalue);
+				             }},
 				             {name : 'age',index : 'age',align:"center",width : 20},
 				             {name : 'mobileNumber',index : 'mobileNumber',align:"center",width : 30},
 				             {name : 'operate', index: 'operate', align:"center",width : 60,formatter: function (cellvalue, options, rowObject) {
@@ -162,12 +164,12 @@ $(function() {
 		$("#add_dialog").modal("show");
 	}
 	
-	function edit(id) {
-//		$("#edit_dialog_content").load('${ctx}/sys/user/edit?id=' + id);
-//		$("#edit_dialog").modal("show");
-	}
-
 })
+
+function edit(id) {
+		$("#edit_dialog_content").load('${ctx}/module/case/edit?id=' + id);
+		$("#edit_dialog").modal("show");
+}
 
 function openDrug(parentId) {
 	$("#page-content-area").load('${ctx}/module/drug/list?parentId='+parentId);

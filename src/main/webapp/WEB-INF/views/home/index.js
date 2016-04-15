@@ -32,8 +32,16 @@ function resizeGrid(grid_render_id,func){
  * 校验表单输入是否合法
  * @param formId
  */
-function validate(formId) {
+function validate(formId, rules, messages) {
+	if (rules ==null || rules == "") {
+		rules = {};
+	}
+	if (messages ==null || messages == "") {
+		messages = {};
+	}
 	$(formId).validate({
+		rules : rules,
+		messages : messages,
 		errorElement: 'div',
 		errorClass: 'help-block',
 		focusInvalid: true,

@@ -1,122 +1,65 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<form id="edit_form" class="form-horizontal" action="sys/res/save" method="post">
-	<input type="hidden" name="id" value="${res.id}"/>
-	<input type="hidden" name="parent.id" value="${res.parent.id}"/>
-	<div class="form-group">
-		<label class="col-sm-3 control-label no-padding-right" for="form-input-readonly">上级资源：</label>
-		<div class="col-sm-9">
-			<input disabled="disabled" type="text" class="input-xlarge" id="form-input-readonly" value="${res.parent.fullName }" /> 
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="cm" tagdir="/WEB-INF/tags" %>
+<form id="edit_form" role="form" class="form-horizontal page-content" action="${ctx}/module/case/save" method="post">
+	<input type="hidden" name="id" value="${case.id}"/>
+	<div class="form-group col-md-6" >
+		<label class="col-md-4 control-label no-padding-right" for="name"><span style="color: red">*</span>姓名：</label>
+		<div class="col-md-8">
+			<input type="text" class="form-control" id="name" name="name" value="${case.name }" maxlength="32" required class="input-xlarge" />
 		</div>
 	</div>
-
-	<div class="form-group">
-		<label class="col-sm-3 control-label no-padding-right"><span style="color: red">*</span>资源类型：</label>
-		<div class="radio col-sm-2">
-			<label>
-				<input name="type" value="GROUP" type="radio" <c:if test="${res.type.value == 0}">checked</c:if> required class="ace" />
-				<span class="lbl">资源组</span>
-			</label>
-		</div>
-		<div class="radio col-sm-2">
-			<label>
-				<input name="type" value="MENU" type="radio" <c:if test="${res.type.value == 1}">checked</c:if> class="ace" />
-				<span class="lbl">菜单</span>
-			</label>
-		</div>
-		<div class="radio col-sm-2">
-			<label>
-				<input name="type" value="FUNCTION" type="radio" <c:if test="${res.type.value == 2}">checked</c:if> class="ace" />
-				<span class="lbl">功能</span>
-			</label>
+	<div class="form-group col-md-6">
+		<label class="col-md-4 control-label no-padding-right" for="sex"><span style="color: red">*</span>性别：</label>
+		<div class="col-md-8">
+			<cm:dict name="sex" category="sex" id="sex" displaySelectAll="true" selectedValue="${case.sex }" myClass="input-xlarge form-control" expression="required"></cm:dict>
 		</div>
 	</div>
-
-	<div class="form-group">
-		<label class="col-sm-3 control-label no-padding-right" for="name"><span style="color: red">*</span>资源名称：</label>
-		<div class="col-sm-9">
-			<input type="text" id="name" name="name" value="${res.name }" maxlength="32" required class="input-xlarge" />
+	<div class="form-group col-md-6" >
+		<label class="col-md-4 control-label no-padding-right" for="age"><span style="color: red">*</span>年龄：</label>
+		<div class="col-md-8">
+			<input type="text" class="form-control" id="age" name="age" value="${case.age }" maxlength="16" class="input-xlarge" required/>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label no-padding-right" for="fullName"><span style="color: red">*</span>资源全称：</label>
-		<div class="col-sm-9">
-			<input type="text" id="fullName" name="fullName" value="${res.fullName}" maxlength="86" required class="input-xlarge" />
+	<div class="form-group col-md-6">
+		<label class="col-md-4 control-label no-padding-right" for="mobileNumber"><span style="color: red">*</span>手机号：</label>
+		<div class="col-md-8">
+			<input type="text" class="form-control" class="input-xlarge" id="mobileNumber" name="mobileNumber" value="${case.mobileNumber }" maxlength="16" required/> 
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label no-padding-right" maxlength="255" for="uri">资源路径：</label>
-		<div class="col-sm-9">
-			<input type="text" id="uri" name="uri"  value="${res.uri }" class="input-xlarge" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label no-padding-right" for="icon">资源图标：</label>
-		<div class="col-sm-9">
-			<input type="text" id="icon" name="icon" value="${res.icon }" class="input-xlarge" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label no-padding-right" for="permission">权限标识：</label>
-		<div class="col-sm-9">
-			<input type="text" id="permission" name="permission" value="${res.permission }" maxlength="255" placeholder="user:edit:*" class="input-xlarge" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label no-padding-right" for="sortNo"><span style="color: red">*</span>排序号：</label>
-		<div class="col-sm-3">
-			<input type="text" id="sortNo" name="sortNo" value="${res.sortNo }" required digits="true" class="col-xs-10 col-sm-5" />
-		</div>
-		<div class="col-sm-6 checkbox">
-			<label>
-				<input id="isSuper" name="isSuper" <c:if test="${res.isSuper}">checked</c:if> type="checkbox" class="ace" /><span class="lbl">超级管理员权限</span>
-			</label>
-		</div>
-	</div>
-	<div>
-		<label for="description">描述</label>
-		<textarea class="form-control" id="description" name="description" placeholder="">${res.description }</textarea>
+	
+	<div class="row"> 
 	</div>
 </form>
 
 <script type="text/javascript">
 	$(function() {
-		$("#edit_form").validate({
-			errorElement: 'div',
-			errorClass: 'help-block',
-			focusInvalid: false,
-			invalidHandler: function (event, validator) { //display error alert on form submit   
-				$('.alert-danger', $('.login-form')).show();
-			},
-	
-			highlight: function (e) {
-				$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-			},
-	
-			success: function (e) {
-				$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
-				$(e).remove();
-			},
-	
-			errorPlacement: function (error, element) {
-				if(element.is(':checkbox') || element.is(':radio')) {
-					var controls = element.closest('div[class*="col-"]');
-					if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-					else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-				}
-				else if(element.is('.select2')) {
-					error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-				}
-				else if(element.is('.chosen-select')) {
-					error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-				}
-				else error.insertAfter(element.parent());
-			},
-	
-			submitHandler: function (form) {
-			}
-		});
+		//手机号码验证
+		jQuery.validator.addMethod("isMobile", function(value, element) {
+		    var length = value.length;
+		    var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+		    return this.optional(element) || (length == 11 && mobile.test(value));
+		}, "请填写正确的手机号");
+		
+		var rules = {
+	    	mobileNumber : {
+	            required : true,
+	            minlength : 11,
+	            isMobile : true
+	        }
+	    };
+		
+		var messages = {
+	        phone : {
+	            required : "请输入手机号",
+	            //minlength : "确认手机不能小于11个字符",
+	            isMobile : "请正确填写您的手机号码"
+	        }
+	    };
+		
+		validate("#edit_form", rules, messages);
 	});
+	
 </script>
