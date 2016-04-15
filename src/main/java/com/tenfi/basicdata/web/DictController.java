@@ -237,5 +237,19 @@ public class DictController {
 
 		return sb.toString();
 	}
+	
+	@RequestMapping(value="/getDictByParentCode", method = RequestMethod.GET)
+	@ResponseBody
+	public String getDictByParentCode(String parentCode) {
+		List<Dict> dictList = service.getSonType(parentCode);
+		StringBuffer str = new StringBuffer();
+		str.append("<select>");
+		str.append("<option> </option>");
+		for(Dict dict : dictList){
+			str.append("<option value="+dict.getCode()+">"+dict.getName()+"</option>");
+		}
+		str.append("</select>");
+		return str.toString();
+	}
 
 }

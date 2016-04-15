@@ -32,7 +32,6 @@ public class DictServiceImpl extends TreeServiceImpl<Dict, Integer> implements D
 		Search search = new Search(Dict.class);
 		search.addFilterEqual("parent.code", code);
 		search.addFilterEqual("status", Status.VALID);
-		//search.addFilterEqual("status", "2");
 		return this.dao.search(search);
 	}
 

@@ -620,6 +620,7 @@
 <script src="${ctx}/static/jquery/validate/jquery.validate.js"></script>
 <script src="${ctx}/static/jquery/validate/messages_bs_zh.js"></script>
 <script src="${ctx}/static/jquery/jquery.loadmask.js"></script>
+<script src="${ctx}/static/js/dictionary.js"></script>
 
 <script type="text/javascript">
 	<%@ include file="index.js" %>
