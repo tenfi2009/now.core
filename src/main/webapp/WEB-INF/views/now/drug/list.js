@@ -9,7 +9,7 @@ jQuery(function($) {
 	})
 
 	jQuery(grid_selector).jqGrid({
-		url : "${ctx}/module/drug/listData?userId=${userId}",
+		url : "${ctx}/module/drug/listData?parentId=${parentId}",
 		datatype : "json",
 //		postData:{"userId":"${userId}"},
 		height: 'auto',
@@ -55,7 +55,7 @@ jQuery(function($) {
 			}, 0);
 		},
 		pgbuttons: false,
-		editurl: "${ctx}/module/drug/editOrDel?parentId=${userId}",//nothing is saved
+		editurl: "${ctx}/module/drug/editOrDel?parentId=${parentId}",//nothing is saved
 		caption: "药物列表"
 
 		//,autowidth: true,

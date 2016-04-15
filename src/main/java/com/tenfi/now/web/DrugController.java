@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +32,7 @@ public class DrugController extends BaseController{
 			@RequestParam(value = "rows", defaultValue = "20") Integer pageSize,
 			@RequestParam(value = "sidx") String sortField,
 			@RequestParam(value = "sord") String sortType,
-			@RequestParam("userId") String userId) {
+			@RequestParam("parentId") String parentId) {
 		
 		Page<Drug> page = new Page<Drug>();
 		page.setPageSize(pageSize);
@@ -43,7 +42,7 @@ public class DrugController extends BaseController{
 		
 		Map queryParams = new HashMap();
 		
-		String rules = "[{\"t\":\"l\",\"f\":\"parent.id\",\"op\":\"eq\",\"v\":\""+userId+"\"}]";
+		String rules = "[{\"t\":\"l\",\"f\":\"parent.id\",\"op\":\"eq\",\"v\":\""+parentId+"\"}]";
 		String filters = "{\"groupOp\":\"AND\",\"rules\":"+rules+"}";
 		queryParams.put("filters", filters);
 		
@@ -74,8 +73,8 @@ public class DrugController extends BaseController{
 	}
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public String list(ModelMap model, Long userId) {
-		model.put("userId", userId);
+	public String list(ModelMap model, Long parentId) {
+		model.put("parentId", parentId);
 		return "now/drug/list";
 	}
 }

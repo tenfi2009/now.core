@@ -5,21 +5,53 @@ $(function() {
 	$(grid_render_id).jqGrid(
 			{
 				caption : "用户列表",
+				subGrid : true,
+				subGridOptions : {
+					plusicon : "ace-icon fa fa-plus center bigger-110 blue",
+					minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
+					openicon : "ace-icon fa fa-chevron-right center orange"
+				},
+			    subGrid: true,
+			    subGridRowExpanded: function (subgridDivId, rowId) {
+					var parentId = $(grid_render_id).getRowData(rowId).id;
+					var subgridTableId = subgridDivId + "_t";
+					$("#" + subgridDivId).html("<table id='" + subgridTableId + "'></table>");
+					$("#" + subgridTableId).jqGrid({
+						url : '${ctx}/module/drug/listData',
+						datatype : "json",
+						postData: {'parentId':parentId},
+						colNames: ['药物名称', '单价金额', '数量', '总额'],
+						colModel: [
+							{name:'drugName',index:'drugName', width:100},
+							{name:'feeAmount',index:'feeAmount', width:100},
+							{name:'number',index:'number', width:100},
+							{name:'feeSumAmount',index:'feeSumAmount', width:100}
+						],
+						sortname : "createTime",
+						sortorder : "asc",
+						jsonReader : {
+							root : "result",
+							page : "currPage",
+							total : "totalPage",
+							records : "totalCount"
+						}
+					});
+				},
 				height : 'auto',
 				rowNum : 15,
 				rowList : [ 15, 25, 50, 100 ],
 				url : "${ctx}/module/case/listData",
 				datatype : "json",
 				colNames : [ 'ID','姓名','性别','年龄','手机号','操作'],
-				colModel : [ {name : 'id',index : 'id',hidden : true},
-				             {name : 'name',index : 'name',width : 60},
-				             {name : 'sex',index : 'sex',width : 60},
-				             {name : 'age',index : 'age',width : 60},
-				             {name : 'mobileNumber',index : 'mobileNumber',width : 100},
-				             {name : 'id', index: 'id', align:"center",width : 100,formatter: function (cellvalue, options, rowObject) {
-				            	 var actions = "<a href='javascript:void(0)'  onclick=\"addNew('" + cellvalue + "')\">新建下级</a>";
-				            	 actions += "|<a href='javascript:void(0)'  onclick=\"edit('" + cellvalue + "')\">修改</a>";
-				            	 actions += "|<a href='javascript:void(0)'  onclick=\"openDrug('" + cellvalue + "')\">开药</a>";
+				colModel : [ {name : 'id',index : 'id',width : 20, hidden : true},
+				             {name : 'name',index : 'name',align:"center",width : 30},
+				             {name : 'sex',index : 'sex',align:"center",width : 20},
+				             {name : 'age',index : 'age',align:"center",width : 20},
+				             {name : 'mobileNumber',index : 'mobileNumber',align:"center",width : 30},
+				             {name : 'operate', index: 'operate', align:"center",width : 60,formatter: function (cellvalue, options, rowObject) {
+				            	 var parentId = rowObject["id"];
+				            	 var actions = "<a href='javascript:void(0)'  onclick=\"edit('" + parentId + "')\">修改</a>";
+				            	 actions += "|<a href='javascript:void(0)'  onclick=\"openDrug('" + parentId + "')\">开药</a>";
 				            	 return actions;
 				             }}
 				            ],
@@ -64,10 +96,9 @@ $(function() {
 				addicon : 'ace-icon fa fa-plus-circle purple',
 				addfunc : addNew,
 				addtitle : "",
-				del : true,
+				del : false,
 				deltext : "删除",
 				delicon : 'ace-icon fa fa-trash-o red',
-				delfunc : remove,
 				search : false,
 				searchtext : "查询",
 				searchicon : 'icon-search orange',
@@ -85,29 +116,10 @@ $(function() {
 			},
 			{}, // delete instead that del:false we need this
 			{ // search options
-				caption : "高级查询",
-				recreateForm : true,
-				afterShowSearch : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-title')
-							.wrap('<div class="widget-header" />')
-					$.jqGridExt.setStyleSearchForm(form);
-				},
-				afterRedraw : function() {
-					$.jqGridExt.setStyleSearchFilters($(this));
-				},
-				showQuery : false,
-				multipleSearch : true
 			},
 			{}/* view parameters*/
 			
-	).jqGrid('navButtonAdd',pager_render_id,{
-		   caption:"提交", 
-		   title : "提交用户信息",
-		   buttonicon:"fa fa-check-circle", 
-		   onClickButton: submit,
-		   position:"before refresh_userTable"
-		});
+	);
 
 	//var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 	$("#add_dialog_save").on('click', function() {
@@ -151,101 +163,16 @@ $(function() {
 	}
 	
 	function edit(id) {
-		$("#edit_dialog_content").load('${ctx}/sys/user/edit?id=' + id);
-		$("#edit_dialog").modal("show");
+//		$("#edit_dialog_content").load('${ctx}/sys/user/edit?id=' + id);
+//		$("#edit_dialog").modal("show");
 	}
 
-	function remove(id) {
-		bootbox.confirm("您确认要删除该用户吗?", function(result) {
-			if (result) {
-				$.get("${ctx}/sys/user/remove/" + id,
-						function(data) {
-							if ("success" == data.status) {
-								$(grid_render_id).jqGrid().trigger("reloadGrid");
-							} else if ("error" == data.status) {
-								bootbox.alert(data.msg);
-							}
-						}, "json");
-			}
-		});
-	}
 })
 
-function openDrug(userId) {
-	$("#page-content-area").load('${ctx}/module/drug/list?userId='+userId);
+function openDrug(parentId) {
+	$("#page-content-area").load('${ctx}/module/drug/list?parentId='+parentId);
 //	$("#list_dialog_content").modal("show");
 }
-
-function resetPw(id) {
-	$("#reset_password_dialog_content").load('${ctx}/sys/user/resetPw?id='+id);
-	$("#reset_password_dialog").modal("show");
-}
-
-function disenable(id) {
-	bootbox.confirm("您确认要禁用该用户吗?", function(result) {
-		if (result) {
-			$.get("${ctx}/sys/user/disenable/" + id,
-					function(data) {
-						if ("success" == data.status) {
-							$(grid_render_id).jqGrid().trigger("reloadGrid");
-						} else if ("error" == data.status) {
-							bootbox.alert(data.msg);
-						}
-					}, "json");
-		}
-	});
-}
-
-$("#reset_password_dialog_save").on('click', function() {
-	if(!$("#reset_password_form").valid()){
-		return
-	}
-	$("#reset_password_form").ajaxSubmit({
-		dataType : 'json',
-		success : function(data) {
-			if ("success" == data.status) {
-				$('#reset_password_dialog').modal("hide");
-			} else {
-				bootbox.alert(data.msg);
-			}
-		}
-	});
-});
-
-function setOrgRange(id){
-	
-}
-
-function assignRole(id) {
-	$("#assign_role_dialog_content").load('${ctx}/sys/user/assignRole?id='+id);
-	$("#assign_role_dialog").modal("show");
-}
-
-function submit(id) {
-	var selectedId = jQuery(grid_render_id).jqGrid('getGridParam','selrow');
-	if(null == selectedId || "" == selectedId){
-		bootbox.alert("请选择要提交的记录！");
-		return;
-	}
-	bootbox.confirm("您确认要提交该用户信息吗?", function(result) {
-		if (result) {
-			$.get("${ctx}/sys/user/submit/" + selectedId,
-					function(data) {
-						if ("success" == data.status) {
-							$(grid_render_id).jqGrid().trigger("reloadGrid");
-						} else if ("error" == data.status) {
-							bootbox.alert(data.msg);
-						}
-					}, "json");
-		}
-	});
-}
-
-var queryOrgTree = $("#queryorgFullName").dropDownTree({ssource:"${ctx}/sys/org/getOrgTree",fieldId:"queryOrgId",selectEmptyText:"清空组织",queryAddon:false});
-$("#queryorgFullName").click(function(event){
-	queryOrgTree.show();
- });
-
 
 function getQueryFilter() {
 	var rules = '';

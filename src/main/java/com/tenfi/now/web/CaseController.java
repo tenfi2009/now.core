@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,24 +74,4 @@ public class CaseController extends BaseController {
 		return rs;
 	}
 	
-	@RequestMapping(value="/remove/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public AjaxResult remove(@PathVariable Long id) {
-		AjaxResult rs = new AjaxResult();
-		if(null == id){
-			rs.setStatus(AjaxResult.STATUS_ERROR);
-			rs.setMsg("删除时参数id不能为空！");
-			return rs;
-		}
-		try{
-			service.removeById(id);
-			rs.setStatus(AjaxResult.STATUS_SUCCESS);
-			rs.setMsg("删除成功！");
-		}catch(Exception e){
-			rs.setStatus(AjaxResult.STATUS_ERROR);
-			rs.setMsg("删除失败！<br/>" + e.getMessage());
-		}
-		
-		return rs;
-	}
 }
