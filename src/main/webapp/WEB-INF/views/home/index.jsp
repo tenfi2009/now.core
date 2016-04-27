@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="${ctx}/static/jqGrid/css/jquery-ui.css" />
   <link rel="stylesheet" href="${ctx}/static/jquery/validate/css/validate.css" />
   <link rel="stylesheet" href="${ctx}/static/jquery/css/jquery.loadmask.css" />
+  <link rel="stylesheet" href="${ctx}/static/bootstrap/css/bootstrap-datetimepicker.css" />
   <!-- text fonts -->
   <link rel="stylesheet" href="${ctx}/static/bootstrap/css/ace-fonts.css" />
 
@@ -608,6 +609,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${ctx}/static/dist/js/demo.js"></script>
 
+<!-- ace settings handler -->
+<script src="${ctx}/static/bootstrap/js/ace-extra.js"></script>
+
 
 <!-- user custom -->
 <script src="${ctx}/static/zTree/js/jquery.ztree.all-3.5.min.js"></script>
@@ -622,6 +626,9 @@
 <script src="${ctx}/static/jquery/jquery.loadmask.js"></script>
 <script src="${ctx}/static/js/dictionary.js"></script>
 <script src="${ctx}/static/js/decimal.min.js"></script>
+<script src="${ctx}/static/bootstrap/js/moment.js"></script>
+<script src="${ctx}/static/bootstrap/js/bootstrap-datetimepicker.js"></script>
+<script src="${ctx}/static/bootstrap/js/bootstrap-timepicker.js"></script>
 
 <script type="text/javascript">
 	<%@ include file="index.js" %>

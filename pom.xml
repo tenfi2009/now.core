@@ -54,6 +54,18 @@
 		<artifactId>spring-orm</artifactId>
 		<version>${spring.version}</version>
 	</dependency>
+	<!-- 添加SchedulerFactoryBean -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context-support</artifactId>
+		<version>${spring.version}</version>
+		<exclusions>
+			<exclusion>
+				<artifactId>commons-logging</artifactId>
+				<groupId>commons-logging</groupId>
+			</exclusion>
+		</exclusions>
+	</dependency>
 	
 	<!-- hibernate -->
 	<dependency>
@@ -71,7 +83,7 @@
 	<dependency>
 		<groupId>com.googlecode.genericdao</groupId>
 		<artifactId>dao</artifactId>
-		<version>${genericdao.version}</version> use current version
+		<version>${genericdao.version}</version> <!-- use current version -->
 	</dependency>
 	<dependency>
 		<groupId>com.googlecode.genericdao</groupId>
@@ -191,6 +203,19 @@
 		<artifactId>jstl</artifactId>
 		<version>1.2</version>
 	</dependency>
+	<!-- 	maven javax.servlet.http不存在 -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.0.1</version>
+		<scope>provided</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.quartz-scheduler</groupId>
+		<artifactId>quartz</artifactId>
+		<version>2.2.1</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>now.core</finalName>
@@ -205,6 +230,7 @@
 				<source>${java.version}</source>
 				<target>${java.version}</target>
 				<showWarnings>true</showWarnings>
+				<encoding>utf8</encoding>
 			</configuration>
 		</plugin>
 		

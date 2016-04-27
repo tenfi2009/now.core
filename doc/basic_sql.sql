@@ -144,3 +144,39 @@ create table t_bd_dict
 )ENGINE=InnoDB;
 
 /********************************基础数据 结束**************************************************/
+
+-- ================================================================================================--
+-- author   张芳
+-- create time 2016-01-19
+-- description 作业表(t_quartz_job)
+-- ================================================================================================--
+create table t_quartz_job
+(
+   id                   bigint  NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '主键',
+   job_group            varchar(32) comment '作业组',
+   job_name             varchar(32) comment '作业名称',
+   description          varchar(255) comment '作业描述',
+   class_name           varchar(255) comment '实现类',
+   params               varchar(255) comment '参数'
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='作业表';
+-- ================================================================================================--
+-- author   张芳
+-- create time 2016-01-19
+-- description 计划设置表(t_quartz_job_scheduler)
+-- ================================================================================================--
+create table t_quartz_job_scheduler
+(
+   id                   bigint  NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '主键',
+   job_id               bigint comment '作业ID',
+   scheduler_name       varchar(32) comment '计划名称',
+   type                 integer comment '1:一次,2:间隔,3:每天,4:每周,5:每月,6:Cron表达式',
+   start_date           datetime comment '开始日期',
+   run_time             time comment '运行时间',
+   time_interval        integer comment '间隔时间',
+   unit                 integer comment '1:秒,2:分,3:小时',
+   repeat_count         integer comment '重复次数',
+   day                  varchar(64) comment '星期/日',
+   cron                 varchar(254) comment '表达式',
+   update_time          datetime comment '更新时间',
+   update_user          varchar(64) comment '更新人员'
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='计划设置表';

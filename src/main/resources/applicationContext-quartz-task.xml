@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-4.1.xsd
+		http://www.springframework.org/schema/jdbc classpath:/org/springframework/jdbc/config/spring-jdbc-4.1.xsd
+		http://www.springframework.org/schema/jee classpath:/org/springframework/ejb/config/spring-jee-4.1.xsd
+		http://www.springframework.org/schema/aop classpath:/org/springframework/aop/config/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/tx classpath:/org/springframework/transaction/config/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/data/jpa classpath:/org/springframework/data/jpa/repository/config/spring-jpa-1.3.xsd"
+	default-lazy-init="true">
+	<bean name="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false" autowire="no">
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+		<property name="applicationContextSchedulerContextKey" value="applicationContext"/>
+		<property name="configLocation" value="classpath:quartz.properties"/>		
+		<!--这个是必须的，QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动 --> 
+		<property name="startupDelay" value="60"/>          
+		<!--这个是可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了    -->
+		<property name="overwriteExistingJobs" value="true"/>  
+		<property name="taskExecutor">
+			<bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+				<property name="daemon" value="true"></property>
+				<property name="corePoolSize" value="10" />
+				<property name="maxPoolSize" value="100" />
+				<property name="queueCapacity" value="20" />
+				<property name="keepAliveSeconds" value="300" />
+				<property name="threadNamePrefix" value="AMS-TASK-TIMER" />
+			</bean>
+		</property>
+		<property name="schedulerListeners">
+			<list>
+				<bean class="com.tenfi.quartz.TenFiSchedulerListener"></bean>
+			</list>
+		</property>
+		<property name="globalTriggerListeners">
+			<list>
+				<bean class="com.tenfi.quartz.TenFiTriggerListener"></bean>
+			</list>
+		</property>
+	</bean>
+</beans>
